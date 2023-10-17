@@ -94,6 +94,8 @@ def delete_request(user_id):
 
 
 #Call the function
+userID = post_request()
+
 get_request()
-put_request(post_request())
-delete_request(post_request())
+put_request(userID)
+delete_request(userID)
