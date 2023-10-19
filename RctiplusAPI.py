@@ -9,7 +9,7 @@ base_url = "https://hera.mncplus.id/claim-monetization"
 
 #Auth token:
 auth_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2aWQiOjY1MjAsInRva2VuIjoiZDJhNDhiNTk2ZDc5ZWNmOCIsInBsIjoibXdlYiIsImRldmljZV9pZCI6IjEifQ.KZ31oR5fiV0KmrYYyrsmRb9H1o5UtklYC5SqWEUhQKc"
-api_key =  "43aCSi34YX5wUf4Fd3kb5Lbdvzwyx9f2" #abc
+api_key =  "43aCSi34YX5wUf4Fd3kb5Lbdvzwyx9f2"
 
 
 #GET
@@ -21,8 +21,8 @@ def get_request():
         header = {'Authorization': auth_token}
         apikeys = {'apikey': api_key}
 
-        r = requests.get(headers=header, params=apikeys)
-        # r.raise_for_status()  # Raise an exception for HTTP errors (4xx, 5xx)
+        r = requests.get(url, headers={**header, **apikeys}) #merge the header and apikeys dictionaries into a single dictionary that is then passed as the headers argument to the requests.get() method.
+        r.raise_for_status()  # Raise an exception for HTTP errors (4xx, 5xx)
         j_data = r.json()
         j_str = json.dumps(j_data, indent=4)
 
