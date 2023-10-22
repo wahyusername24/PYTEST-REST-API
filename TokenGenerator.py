@@ -20,10 +20,10 @@ def token_visitor():
         api_key = {'apikey':dev}
         r = requests.get(url=uri, headers=api_key)
         j_data = r.json()
-        print('')
-        print('Token Visitor:')
         visitor = j_data['data']['access_token']
-        print(visitor)
+        # print('')
+        # print('Token Visitor:')
+        # print(visitor)
         return visitor
 
     except requests.exceptions.RequestException as e:
@@ -35,20 +35,20 @@ def token_login(visitor):
     header = {'Authorization':visitor}
     apiKey = {'apikey': dev}
     data = {
-    "username": "apritadhita@gmail.com",
+    "username": "wahyupanji240@gmail.com",
     "phone_code": "",
-    "password": "dhita229",
+    "password": "qwerty12345",
     "device_id": "1",
     "platform": "mweb"
     }
     r = requests.post(url, headers={**header, **apiKey}, json=data)
     j_data = r.json()
-    print('')
-    print('Token Login:')
     login = j_data['data']['access_token']
-    print(login)
-
+    # print('')
+    # print('Token Login:')
+    # print(login)
+    print('')
+    return login
 
 # Call
-# token_visitor()
-token_login(token_visitor())
+# token_login(token_visitor())
