@@ -8,6 +8,7 @@ base_url = "https://todo.pixegami.io"
 
 
 def test_can_create_task():
+    # create task
     payload = new_task_payload()
     create_task_response = create_task(payload)
 
@@ -15,6 +16,8 @@ def test_can_create_task():
     c_data = create_task_response.json()
     
     task_id = c_data['task']['task_id']
+    
+    # get task 
     get_task_response = get_task(task_id)
 
     assert get_task_response.status_code == 200
