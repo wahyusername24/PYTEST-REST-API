@@ -3,7 +3,7 @@ import random
 import json
 import string
 
-from TokenGenerator import token_visitor, token_login
+from TokenGenerator import token_visitor, login_core_api
 from TokenGenerator import dev, rc
 
 #base url:
@@ -11,7 +11,7 @@ base_url = "https://hera.mncplus.id/claim-monetization"
 
 #Auth token:
 visitor_token = token_visitor()
-login_token = token_login(visitor_token)
+login_token = login_core_api(visitor_token)
 
 
 #GET
