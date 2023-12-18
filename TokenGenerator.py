@@ -25,8 +25,8 @@ def token_visitor():
         j_data = r.json()
         visitor = j_data['data']['access_token']
         print('')
-        print('Token Visitor:')
-        print(visitor)
+        # print('Token Visitor:')
+        # print(visitor)
         return visitor
 
     except requests.exceptions.RequestException as e:
@@ -67,11 +67,11 @@ def login_core_idp(visitor):
     j_data = r.json()
     login = j_data['data']['access_token']
     print('')
-    print('Token Login Core-IDP:')
-    print(login)
+    # print('Token Login Core-IDP:')
+    # print(login)
     print('')
     return login
 
 # Call
-login_core_api(token_visitor())
-login_core_idp(token_visitor())
+# login_core_api(token_visitor())
+# login_core_idp(token_visitor())

@@ -15,7 +15,7 @@ login_token = login_core_api(visitor_token)
 
 
 #GET
-def get_request():
+def test_get_request():
     
     try:
         url = base_url + "/music-claim/list-musics?page=1&length=10"
@@ -44,4 +44,4 @@ def get_request():
         print("Request Exception:", e)
 
 #Call
-get_request()
+test_get_request()
