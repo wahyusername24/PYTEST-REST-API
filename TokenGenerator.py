@@ -17,10 +17,15 @@ dev = '43aCSi34YX5wUf4Fd3kb5Lbdvzwyx9f2'
 rc = 'pHuoiDJvkh5d6CmmlNdUWVMSPLYTocCp'
 prod = 'k1DzR0yYWIyZgvTvixiDHnb4Nl08wSU0'
 
+#Credential
+username = 'thesigit@gmail.com'
+password = '11112222'
+platform = 'web'
+
 def token_visitor():
     try:
-        uri = base_url_prod + '/video/api/v1/visitor?platform=web'
-        api_key = {'apikey':prod}
+        uri = f"{base_url_dev}/video/api/v1/visitor?platform={platform}"
+        api_key = {'apikey':dev}
         r = requests.get(url=uri, headers=api_key)
         j_data = r.json()
         visitor = j_data['data']['access_token']
@@ -34,9 +39,9 @@ def token_visitor():
 
 
 def login_core_api(visitor):
-    url = prod_api + '/api/v3/login'
+    url = dev_api + '/api/v3/login'
     header = {'Authorization':visitor}
-    apiKey = {'apikey': prod}
+    apiKey = {'apikey': dev}
     data = {
         "username": "wahyupanji240@gmail.com",
         "phone_code": "",
@@ -54,18 +59,22 @@ def login_core_api(visitor):
     return login
 
 def login_core_idp(visitor):
-    url = base_url_prod + '/core-idp/api/v1/visitor/login'
+    url = base_url_dev + '/core-idp/api/v1/visitor/login'
     header = {'Authorization':visitor}
-    apiKey = {'apikey':prod}
+    apiKey = {'apikey':dev}
     data = {
-        "username": "wahyupanji240@gmail.com",
-        "password": "qwerty12345",
+        "username": username,
+        "password": password,
         "device_id": "3463784",
-        "platform": "web"
+        "platform": platform
     }
     r = requests.post(url, headers={**header, **apiKey}, json=data)
     j_data = r.json()
+    print("Status Code: ", r.status_code)
+
     login = j_data['data']['access_token']
+    assert r.status_code == 200 #general status code
+    assert j_data['status']['code'] == 0 #inner status code
     print('')
     # print('Token Login Core-IDP:')
     # print(login)
