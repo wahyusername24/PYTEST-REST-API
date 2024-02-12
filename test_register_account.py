@@ -13,9 +13,9 @@ visitor_token = token_visitor()
 platform = "web"
 country_code = ""
 phone_code = ""
-username = "thesigit3@gmail.com" #phone or email
+username = "thesigit7@gmail.com" #phone or email
 password = "11112222" 
-fullname = "TheSigit3" 
+fullname = "TheSigit7" 
 dob = "2000-04-25"
 gender =  "male"
 
@@ -74,6 +74,11 @@ def create_account(otp):
         print('Response Body: ', j_str)
         assert r.status_code == 200 #general status code
         assert j_data['status']['code'] == 0 #inner status code
+        assert j_data['data']['email'] == username
+        assert j_data['data']['display_name'] == fullname
+        assert j_data['data']['email_verified'] == 'yes'
+        assert j_data['data']['username'] == username
+        
 
     except requests.exceptions.RequestException as e:
         print("Request Exception:", e)
