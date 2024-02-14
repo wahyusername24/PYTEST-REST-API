@@ -13,9 +13,9 @@ visitor_token = token_visitor()
 platform = "web"
 country_code = ""
 phone_code = ""
-username = "banteng2@gmail.com"  # phone or email
+username = "banteng3@gmail.com"  # phone or email
 password = "11112222"
-fullname = "banteng2"
+fullname = "banteng3"
 dob = "2000-04-25"
 gender = "male"
 
