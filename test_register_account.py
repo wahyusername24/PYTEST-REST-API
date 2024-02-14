@@ -13,9 +13,9 @@ visitor_token = token_visitor()
 platform = "web"
 country_code = ""
 phone_code = ""
-username = "thesigit19@gmail.com"  # phone or email
+username = "jokowi2@gmail.com"  # phone or email
 password = "11112222"
-fullname = "TheSigit19"
+fullname = "pakdhe"
 dob = "2000-04-25"
 gender = "male"
 
@@ -52,38 +52,37 @@ def test_generate_otp():
         print("Request Exception:", e)
 
 
-# def test_create_account():
-#     otp = test_generate_otp()
-#     try:
-#         url = dev_api + '/api/v3/register'
-#         header = {'Authorization': visitor_token}
-#         data = {
-#             "otp": otp,
-#             "country_code": country_code,
-#             "phone_code": phone_code,
-#             "username": username,
-#             "password": password,
-#             "fullname": fullname,
-#             "dob": dob,
-#             "gender": gender,
-#             "device_id": "1234567890"
-#         }
+def test_create_account(otp):
+    try:
+        url = dev_api + '/api/v3/register'
+        header = {'Authorization': visitor_token}
+        data = {
+            "otp": otp,
+            "country_code": country_code,
+            "phone_code": phone_code,
+            "username": username,
+            "password": password,
+            "fullname": fullname,
+            "dob": dob,
+            "gender": gender,
+            "device_id": "1234567890"
+        }
 
-#         r = requests.post(url, headers=header, json=data)
-#         r.raise_for_status
-#         j_data = r.json()
-#         j_str = json.dumps(j_data, indent=4)
-#         print('Response Body: ', j_str)
-#         assert r.status_code == 200  # general status code
-#         assert j_data['status']['code'] == 0  # inner status code
-#         assert j_data['data']['email'] == username
-#         assert j_data['data']['display_name'] == fullname
-#         assert j_data['data']['email_verified'] == 'yes'
-#         assert j_data['data']['username'] == username
+        r = requests.post(url, headers=header, json=data)
+        r.raise_for_status
+        j_data = r.json()
+        j_str = json.dumps(j_data, indent=4)
+        print('Response Body: ', j_str)
+        assert r.status_code == 200  # general status code
+        assert j_data['status']['code'] == 0  # inner status code
+        assert j_data['data']['email'] == username
+        assert j_data['data']['display_name'] == fullname
+        assert j_data['data']['email_verified'] == 'yes'
+        assert j_data['data']['username'] == username
 
-#     except requests.exceptions.RequestException as e:
-#         print("Request Exception:", e)
+    except requests.exceptions.RequestException as e:
+        print("Request Exception:", e)
 
 # Call
-# test_create_account()
-test_generate_otp()
+otp = test_generate_otp()
+test_create_account(otp)
