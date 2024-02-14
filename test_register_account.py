@@ -1,10 +1,19 @@
 import requests
 import json
 import pytest
+import faker
 
 from TokenGenerator import token_visitor
 from TokenGenerator import base_url_dev, dev
 from TokenGenerator import dev_api
+from faker import Faker
+
+# generate_random email and username
+fake = Faker()
+random_username = fake.user_name()
+random_email = random_username + "@gmail.com"
+print("random email: ", random_email)
+print("random username: ", random_username)
 
 # auth_token:
 visitor_token = token_visitor()
@@ -13,9 +22,9 @@ visitor_token = token_visitor()
 platform = "web"
 country_code = ""
 phone_code = ""
-username = "banteng3@gmail.com"  # phone or email
+username = random_email
 password = "11112222"
-fullname = "banteng3"
+fullname = random_username
 dob = "2000-04-25"
 gender = "male"
 
@@ -47,6 +56,7 @@ def test_create_account():
         print("Response Body: ", j_str)
         print("Your OTP: ", otp)
 
+        # create_account
         url = dev_api + '/api/v3/register'
         header = {'Authorization': visitor_token}
         data = {
@@ -62,7 +72,7 @@ def test_create_account():
         }
 
         r = requests.post(url, headers=header, json=data)
-        r.raise_for_status
+        r.raise_for_status()
         j_data = r.json()
         j_str = json.dumps(j_data, indent=4)
         print('Response Body: ', j_str)
