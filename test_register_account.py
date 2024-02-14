@@ -13,14 +13,15 @@ visitor_token = token_visitor()
 platform = "web"
 country_code = ""
 phone_code = ""
-username = "jokowi2@gmail.com"  # phone or email
+username = "banteng2@gmail.com"  # phone or email
 password = "11112222"
-fullname = "pakdhe"
+fullname = "banteng2"
 dob = "2000-04-25"
 gender = "male"
 
-def test_generate_otp():
+def test_create_account():
     try:
+        # generate_otp
         url = base_url_dev + '/core-idp/api/v1/visitor/otp'
         print("post url: ", url)
         header = {'Authorization': visitor_token}
@@ -46,14 +47,6 @@ def test_generate_otp():
         print("Response Body: ", j_str)
         print("Your OTP: ", otp)
 
-        return otp
-
-    except requests.exceptions.RequestException as e:
-        print("Request Exception:", e)
-
-
-def test_create_account(otp):
-    try:
         url = dev_api + '/api/v3/register'
         header = {'Authorization': visitor_token}
         data = {
@@ -84,5 +77,4 @@ def test_create_account(otp):
         print("Request Exception:", e)
 
 # Call
-otp = test_generate_otp()
-test_create_account(otp)
+test_create_account()
