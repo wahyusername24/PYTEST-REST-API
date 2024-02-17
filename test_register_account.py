@@ -64,6 +64,7 @@ def test_create_account():
         stsCode = r_register.status_code
         j_data2 = r_register.json()
         j_str2 = json.dumps(j_data2, indent=4)
+        token = j_data2['data']['access_token']
         print("Register Status Code: ", stsCode)
         print(j_str2)
 
@@ -74,9 +75,10 @@ def test_create_account():
         assert j_data2['data']['display_name'] == fullname
         assert j_data2['data']['email_verified'] == 'yes'
         assert j_data2['data']['username'] == email
-
+        return token, email, password
+    
     except requests.exceptions.RequestException as e:
         print("Request Exception:", e)
 
-if __name__ == "__main__":
-    test_create_account()
+# if __name__ == "__main__":
+    # test_create_account()

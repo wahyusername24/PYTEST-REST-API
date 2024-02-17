@@ -18,7 +18,7 @@ rc = 'pHuoiDJvkh5d6CmmlNdUWVMSPLYTocCp'
 prod = 'k1DzR0yYWIyZgvTvixiDHnb4Nl08wSU0'
 
 #Credential
-username = 'thesigit@gmail.com'
+username = 'christophermcdonald@gmail.com'
 password = '11112222'
 platform = 'web'
 
@@ -70,7 +70,7 @@ def login_core_idp(visitor):
     }
     r = requests.post(url, headers={**header, **apiKey}, json=data)
     j_data = r.json()
-    print("Status Code: ", r.status_code)
+    print("Status Code Core-IDP: ", r.status_code)
 
     login = j_data['data']['access_token']
     assert r.status_code == 200 #general status code

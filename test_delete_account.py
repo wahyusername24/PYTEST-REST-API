@@ -1,23 +1,24 @@
 import requests
 import json
 
-from TokenGenerator import token_visitor, login_core_idp
-from TokenGenerator import dev, username
+from TokenGenerator import token_visitor, base_url_dev, base_url_rc, base_url_prod, dev_api, rc_api, prod_api, dev, rc, prod
+from test_register_account import test_create_account
 
-#base_url:
-base_url = 'https://hera.mncplus.id'
-
-#auth_token:
-visitor_token = token_visitor()
-login_coreIDP = login_core_idp(visitor_token)
-
+# Define Environment
+base_url_idp = base_url_dev
+base_url_api = dev_api
+apikey = dev
+platform = 'web'
+token, email, password = test_create_account() 
+username = email
+password = password
 
 def generate_otp():
     try:
-        url = base_url + '/core-idp/api/v1/visitor/otp'
+        url = base_url_idp + '/core-idp/api/v1/visitor/otp'
         print("post url: ", url)
-        header = {'Authorization': visitor_token}
-        apikeys = {'apikey': dev}
+        header = {'Authorization': token_visitor()}
+        apikeys = {'apikey': apikey}
 
         data = {
             "username": username,
@@ -44,10 +45,11 @@ def generate_otp():
     except requests.exceptions.RequestException as e:
         print("Request Exception:", e)
 
-def delete_account(otp):
-    url = base_url + '/core-idp/api/v1/user'
-    header = {'Authorization': login_coreIDP}
-    apikeys = {'apikey': dev}
+def delete_account():
+    otp = generate_otp()
+    url = base_url_idp + '/core-idp/api/v1/user'
+    header = {'Authorization': token}
+    apikeys = {'apikey': apikey}
 
     data = {
         "otp" : otp
@@ -56,4 +58,11 @@ def delete_account(otp):
     r = requests.delete(url, headers={**header,**apikeys}, json=data)
     r.raise_for_status()
     sts_code = r.status_code
+    print("Status Code: ",sts_code)
+    j_data = r.json()
+    j_str = json.dumps(j_data, indent=4)
+    print('Response Body: ', j_str)
     assert sts_code == 200
+
+if __name__ == "__main__":
+    delete_account()
