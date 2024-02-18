@@ -45,7 +45,7 @@ def generate_otp():
     except requests.exceptions.RequestException as e:
         print("Request Exception:", e)
 
-def delete_account():
+def test_delete_account():
     otp = generate_otp()
     url = base_url_idp + '/core-idp/api/v1/user'
     header = {'Authorization': token}
@@ -65,4 +65,4 @@ def delete_account():
     assert sts_code == 200
 
 if __name__ == "__main__":
-    delete_account()
+    test_delete_account()
